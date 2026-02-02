@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cloud_db
+    username: postgres
+    password: sosgasdf1234
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+
+# validate — ตรวจสอบอย่างเดียว ไม่แตะ DB , ถ้าไม่ตรง (ตารางหาย, คอลัมน์ type ผิด) → error ทันที แอปไม่ start
+# update — สร้าง/แก้ schema ให้อัตโนมัติ , ถ้าตารางไม่มี → สร้างให้ / ถ้าคอลัมน์ไม่มี → เพิ่มให้

@@ -1,0 +1,65 @@
+package com.example.demo.ThreeLayer.model;
+
+import java.util.UUID;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "user_test")
+public class UserData {
+    @Id // <-- ตัวนี้บอก JPA ว่า field นี้คือ Primary key
+    @Column(columnDefinition = "uuid")
+    private UUID id;
+
+    private String name;
+    private String email;
+    private String password;
+
+    @PrePersist // <-- Auto gen UUID ก่อน save ลง DB
+    public void generateId() {
+        if (this.id == null) {
+            this.id = UUID.randomUUID();
+        }
+    }
+
+    public UserData(){
+    }
+
+    //จริงๆใช้ Contructor ไปเลยไม่ต้องใช้ PrePersist ก็ได้
+    public UserData(String name,String email,String password){
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
+    public String getName(){
+        return this.name;
+    }
+    public String getEmail(){
+        return this.email;
+    }
+    public String getPassword(){
+        return this.password;
+    }
+    public UUID getId(){
+        return this.id;
+    }
+
+
+    public void setName(String name){
+        this.name = name;
+    }
+    public void setEmail(String email){
+        this.email = email;
+    }
+    public void setPassword(String password){
+        this.password = password;
+    }
+    public void setId(UUID id){
+        this.id = id;
+    }
+}

@@ -38,3 +38,25 @@ UserController.java — @PathVariable String id → UUID id
 6. @Valid validation หยุดทำงาน
 สาเหตุ: น่าจะเป็น AOT cache เก่าค้าง ไม่ได้ rebuild หลังแก้โค้ด
 แก้: ./gradlew clean bootRun เพื่อล้าง cache แล้ว build ใหม่
+
+-------------------------------------------------------
+Question: ทั้งๆที่UserAccountsCommandServiceRepository มันเป็นแค่ interface ทำไม function มันทำงานได้จริง
+
+Answer:
+UserAccountsCommandServiceRepository (CQRS ของคุณ)
+เพราะมี class ที่ implement อยู่ คือ PgUserAccountsCommandRepositoryRepository.java
+
+
+interface UserAccountsCommandServiceRepository
+        ↑
+        implements
+        |
+PgUserAccountsCommandRepositoryRepository  ← ตัวนี้มี code จริง (@Service)
+
+Flow การทำงาน:
+
+CreateUserAccountCommandHandler ประกาศว่าต้องการ UserAccountsCommandServiceRepository
+Spring เห็นว่า PgUserAccountsCommandRepositoryRepository มี @Service และ implements UserAccountsCommandServiceRepository
+Spring จึง inject ตัว PgUserAccountsCommandRepositoryRepository เข้าไปให้อัตโนมัติผ่าน constructor (@RequiredArgsConstructor)
+เวลาเรียก userAccountsCommandService.createUserByEmail(...) จริงๆ แล้วมันเรียก method ใน PgUserAccountsCommandRepositoryRepository ที่ใช้ JdbcTemplate ยิง SQL ลง database
+---------------------------------------------------------

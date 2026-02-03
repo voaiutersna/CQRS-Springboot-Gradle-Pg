@@ -3,6 +3,17 @@
 ./gradlew clean bootRun รัน+clear cache
 
 ###Problem Found###
+
+0. Java Version ในเครื่อง Missmatch กับใน Project 
+แก้: java -version ดู version ในเครื่อง
+แก้ใน build.gradle.kts เป็น version ที่ตรงกัน
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(24)
+	}
+}
+
+
 1. bootRun ไม่ start แอป — แสดง "7 tasks: 7 up-to-date"
 สาเหตุ: Gradle cache ทำให้ bootRun task ถูก skip ไม่ได้รันจริง
 แก้: เพิ่มใน build.gradle.kts:64-66

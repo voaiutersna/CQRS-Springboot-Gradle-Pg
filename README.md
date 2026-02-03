@@ -18,6 +18,14 @@ spring:
 # validate — ตรวจสอบอย่างเดียว ไม่แตะ DB , ถ้าไม่ตรง (ตารางหาย, คอลัมน์ type ผิด) → error ทันที แอปไม่ start
 # update — สร้าง/แก้ schema ให้อัตโนมัติ , ถ้าตารางไม่มี → สร้างให้ / ถ้าคอลัมน์ไม่มี → เพิ่มให้
 
+Java Version ในเครื่อง Missmatch กับใน Project 
+แก้: java -version ดู version ในเครื่อง
+แก้ใน build.gradle.kts เป็น version ที่ตรงกัน
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(24)
+	}
+}
 
 More Detial (JAVA:4.0.2)
 

@@ -17,7 +17,7 @@ public class PgUserExpense implements UserAddExpense {
     private final JdbcTemplate jdbcTemplate;
 
     @Override
-    public UUID createExpenseUser(@NonNull String email,int total_amount,String note,@NonNull UUID category_id,@NonNull int payment_status){
+    public UUID createExpenseUser(@NonNull String email, double total_amount, String note, @NonNull UUID category_id, @NonNull int payment_status){
         final String RawSQL = "INSERT INTO expense (user_id, category_id, total_amount, note, pay_status_id) VALUES ((SELECT id FROM users WHERE email = ?),?,?,?,?) RETURNING id";
         final UUID id = jdbcTemplate.queryForObject(RawSQL, UUID.class, email, category_id, total_amount, note, payment_status);
         return id;

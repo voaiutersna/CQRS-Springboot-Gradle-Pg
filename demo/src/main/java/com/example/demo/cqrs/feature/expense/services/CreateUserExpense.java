@@ -20,7 +20,7 @@ public class CreateUserExpense {
     private final UserExistsQueryRepository userExistsQuery;
 
     @Transactional
-    public UUID createExpense(@NonNull String email, int total_amount, String note, @NonNull UUID category_id, @NonNull int payment_status) {
+    public UUID createExpense(@NonNull String email, double total_amount, String note, @NonNull UUID category_id, @NonNull int payment_status) {
         if (total_amount < 0) {
             throw new ExpenseValidationException("total_amount must not be negative");
         }

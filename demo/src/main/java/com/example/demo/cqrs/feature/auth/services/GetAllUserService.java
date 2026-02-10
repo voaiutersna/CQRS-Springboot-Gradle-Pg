@@ -1,4 +1,4 @@
-package com.example.demo.cqrs.feature.services;
+package com.example.demo.cqrs.feature.auth.services;
 
 import java.util.List;
 

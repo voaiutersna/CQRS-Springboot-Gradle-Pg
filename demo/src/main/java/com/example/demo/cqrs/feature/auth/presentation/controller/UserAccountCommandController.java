@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.cqrs.feature.auth.presentation.dto.CreateUserAccountDto;
-import com.example.demo.cqrs.feature.services.CreateUserAccountCommandHandler;
+import com.example.demo.cqrs.feature.auth.services.CreateUserAccountCommandHandler;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
